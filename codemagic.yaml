@@ -4,13 +4,13 @@ workflows:
     max_build_duration: 120
     instance_type: mac_mini_m1
     integrations:
-      app_store_connect: Berlin Highlights API key
+      app_store_connect: Highlights Berlin Activities
     environment:
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.BerlinHighlights2025
       vars:
-        APP_STORE_APPLE_ID: 6744359142 #change
+        APP_STORE_APPLE_ID: 6744454565 #change
         BUNDLE_ID: 'com.BerlinHighlights2025'
         XCODE_WORKSPACE: 'BerlinHighlights.xcworkspace'
         XCODE_SCHEME: 'BerlinHighlights'
@@ -50,4 +50,4 @@ workflows:
       app_store_connect:
         auth: integration
         submit_to_app_store: true
-        copyright: Berlin Highlights 2025
+        copyright: Berlin Highlights Activities 2025
