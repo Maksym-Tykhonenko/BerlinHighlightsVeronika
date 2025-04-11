@@ -22,14 +22,14 @@ const NavigationPanel = () => {
 
     return (
         <View style={styles.container}>
-{/** 
+{/** */}
             <TouchableOpacity onPress={() => handleFocus('MiniGameScreen')}>
                 <Image
                     source={require('../assets/nav/minigame.png')}
                     style={[{width: 26, height: 26}, focus === 'MiniGameScreen' && {tintColor: '#ff515b'}]}
                 />
             </TouchableOpacity>
-*/}
+
             <TouchableOpacity onPress={() => handleFocus('RandomFactScreen')}>
                 <Image
                     source={require('../assets/nav/random.png')}

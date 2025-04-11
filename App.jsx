@@ -21,6 +21,9 @@ import SettingsScreen from './src/screens/SettingsScreen';
 import MiniGameScreen from './src/screens/MiniGameScreen';
 import BerlinHighlightsProdScr from './src/screens/BerlinHighlightsProdScr';
 enableScreens();
+import LvlFirstMarcyry from './src/screens/LvlFirstMarcyry';
+import LvlSecondVenus from './src/screens/LvlSecondVenus';
+import LvlSecondEarth from './src/screens/LvlThirdEarth';
 
 const Stack = createStackNavigator();
 
@@ -636,7 +639,18 @@ const App = () => {
     }
   };
   console.log('My product Url ==>', finalLink);
-
+{/** 
+                  <Stack.Screen
+                                    name="LvlFirstMarcyry"
+                                    component={LvlFirstMarcyry}
+                                    options={{ headerShown: false }}
+                  />
+                  <Stack.Screen
+                                    name="LvlSecondVenus"
+                                    component={LvlSecondVenus}
+                                    options={{ headerShown: false }}
+                  />
+                  */}
       ///////// Route
       const Route = ({ isFatch }) => {
             if (!aceptTransperency || !completeLink) {
@@ -660,78 +674,78 @@ const App = () => {
                         </Stack.Navigator>
                   );
             }
-            return (
-                  <MusicProvider>
-                        <Stack.Navigator initialRouteName={"AnimationScreen"}>
-                              <Stack.Screen
-                                    name="AnimationScreen"
-                                    component={AnimationScreen}
-                                    options={{ headerShown: false }}
-                              />
-                              <Stack.Screen
-                                    name="WelcomeScreen"
-                                    component={WelcomeScreen}
-                                    options={{ headerShown: false }}
-                              />
-                              <Stack.Screen
-                                    name="LocationsScreen"
-                                    component={LocationsScreen}
-                                    options={{ headerShown: false }}
-                              />
-                              <Stack.Screen
-                                    name="LocationInfoScreen"
-                                    component={LocationInfoScreen}
-                                    options={{ headerShown: false }}
-                              />
-                              <Stack.Screen
-                                    name="PlaceInfoScreen"
-                                    component={PlaceInfoScreen}
-                                    options={{ headerShown: false }}
-                              />
-                              <Stack.Screen
-                                    name="FavoriteScreen"
-                                    component={FavoriteScreen}
-                                    options={{ headerShown: false }}
-                              />
-                              <Stack.Screen
-                                    name="FactsScreen"
-                                    component={FactsScreen}
-                                    options={{ headerShown: false }}
-                              />
-                              <Stack.Screen
-                                    name="FactCategoriesScreen"
-                                    component={FactCategoriesScreen}
-                                    options={{ headerShown: false }}
-                              />
-                              <Stack.Screen
-                                    name="FactLocationsScreen"
-                                    component={FactLocationsScreen}
-                                    options={{ headerShown: false }}
-                              />
-                              <Stack.Screen
-                                    name="FactLocationInfoScreen"
-                                    component={FactLocationInfoScreen}
-                                    options={{ headerShown: false }}
-                              />
-                              <Stack.Screen
-                                    name="RandomFactScreen"
-                                    component={RandomFactScreen}
-                                    options={{ headerShown: false }}
-                              />
-                              <Stack.Screen
-                                    name="SettingsScreen"
-                                    component={SettingsScreen}
-                                    options={{ headerShown: false }}
-                              />
-                              {/** */}
-                              <Stack.Screen
-                                    name="MiniGameScreen"
-                                    component={MiniGameScreen}
-                                    options={{ headerShown: false }}
-                              />
-                        </Stack.Navigator>
-                  </MusicProvider>
-            );
+        return (
+          <MusicProvider>
+            <Stack.Navigator initialRouteName={"AnimationScreen"}>
+              <Stack.Screen
+                name="AnimationScreen"
+                component={AnimationScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="WelcomeScreen"
+                component={WelcomeScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="LocationsScreen"
+                component={LocationsScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="LocationInfoScreen"
+                component={LocationInfoScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="PlaceInfoScreen"
+                component={PlaceInfoScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="FavoriteScreen"
+                component={FavoriteScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="FactsScreen"
+                component={FactsScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="FactCategoriesScreen"
+                component={FactCategoriesScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="FactLocationsScreen"
+                component={FactLocationsScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="FactLocationInfoScreen"
+                component={FactLocationInfoScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="RandomFactScreen"
+                component={RandomFactScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="SettingsScreen"
+                component={SettingsScreen}
+                options={{ headerShown: false }}
+              />
+                             
+              <Stack.Screen
+                name="MiniGameScreen"
+                component={MiniGameScreen}
+                options={{ headerShown: false }}
+              />
+            </Stack.Navigator>
+          </MusicProvider>
+        );
       };
       ///////// Louder
       const [louderIsEnded, setLouderIsEnded] = useState(false);
