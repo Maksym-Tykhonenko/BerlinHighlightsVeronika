@@ -1,4 +1,4 @@
-import { View, Image, TouchableOpacity, Text, StyleSheet, Dimensions, Alert } from 'react-native';
+import { View, Image, TouchableOpacity, Text, StyleSheet, Dimensions, Alert, ScrollView } from 'react-native';
 import Clipboard from '@react-native-clipboard/clipboard';
 import { useNavigation } from '@react-navigation/native';
 
@@ -22,18 +22,20 @@ const FactLocationInfo = ({ location }) => {
                 <Text style={styles.title}>{location.name}</Text>
             </View>
 
-            <View style={{width: '100%', alignSelf: 'center', marginBottom: 20}}>
-                <Image source={location.image} style={{width: '100%', height: 160, resizeMode: 'cover', borderRadius: 7}} />                                    
-                <View style={styles.infoContainer}>
-                    <View style={{width: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20}}>
-                        <Text style={styles.infoText}>📍 {location.address}</Text>
-                        <TouchableOpacity onPress={() => copyAddress(location.address)}>
-                            <Image source={require('../assets/icons/copy.png')} style={{width: 18, height: 20}} />
-                        </TouchableOpacity>
+            <ScrollView style={{width: '100%'}}>
+                <View style={{width: '100%', alignSelf: 'center', marginBottom: 20}}>
+                    <Image source={typeof location.image === 'string' ? { uri: location.image } : location.image} style={{width: '100%', height: 160, resizeMode: 'cover', borderRadius: 7}} />                                    
+                    <View style={styles.infoContainer}>
+                        <View style={{width: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20}}>
+                            <Text style={styles.infoText}>📍 {location.address}</Text>
+                            <TouchableOpacity onPress={() => copyAddress(location.address)}>
+                                <Image source={require('../assets/icons/copy.png')} style={{width: 18, height: 20}} />
+                            </TouchableOpacity>
+                        </View>
+                        <Text style={styles.infoText}>{location.description}</Text>
                     </View>
-                    <Text style={styles.infoText}>{location.description}</Text>
                 </View>
-            </View>
+            </ScrollView>
             
         </View>
     )

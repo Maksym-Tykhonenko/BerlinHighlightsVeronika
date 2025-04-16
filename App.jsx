@@ -10,9 +10,11 @@ import WelcomeScreen from './src/screens/WelcomeScreen';
 import AnimationScreen from './src/screens/AnimationScreen';
 import LocationsScreen from './src/screens/LocationsScreen';
 import LocationInfoScreen from './src/screens/LocationInfoScreen';
+import AddLocationScreen from './src/screens/AddLocationScreen';
 import PlaceInfoScreen from './src/screens/PlaceInfoScreen';
 import FavoriteScreen from './src/screens/FavoriteScreen';
 import FactsScreen from './src/screens/FactsScreen';
+import AddFactScreen from './src/screens/AddFactScreen';
 import FactCategoriesScreen from './src/screens/FactCategoriesScreen';
 import FactLocationsScreen from './src/screens/FactLocationsScreen';
 import FactLocationInfoScreen from './src/screens/FactLocationInfoScreen';
@@ -698,6 +700,11 @@ const App = () => {
                 options={{ headerShown: false }}
               />
               <Stack.Screen
+                name="AddLocationScreen"
+                component={AddLocationScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
                 name="PlaceInfoScreen"
                 component={PlaceInfoScreen}
                 options={{ headerShown: false }}
@@ -710,6 +717,11 @@ const App = () => {
               <Stack.Screen
                 name="FactsScreen"
                 component={FactsScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="AddFactScreen"
+                component={AddFactScreen}
                 options={{ headerShown: false }}
               />
               <Stack.Screen

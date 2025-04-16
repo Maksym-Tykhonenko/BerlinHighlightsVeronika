@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { View, Image, TouchableOpacity, Text, StyleSheet, Dimensions, ScrollView } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import facts from '../constants/facts';
 
 const { height } = Dimensions.get('window');
@@ -8,6 +9,32 @@ const { height } = Dimensions.get('window');
 const Facts = () => {
     const navigation = useNavigation();
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [landmarks, setLandmarks] = useState([]);
+
+    useFocusEffect(
+        useCallback(() => {
+            loadLandmarks();
+        }, [])
+    );
+
+    const loadLandmarks = async () => {
+        try {
+            const storedLandmarks = await AsyncStorage.getItem('landmarks');
+            storedLandmarks ? setLandmarks(JSON.parse(storedLandmarks)) : []
+        } catch (error) {
+            alert('Error loading landmarks');
+        }
+    };
+
+    const deleteLandmark = async (item) => {
+        try {
+            const updated = landmarks.filter((r) => r.id !== item.id);
+            await AsyncStorage.setItem('landmarks', JSON.stringify(updated));
+            setLandmarks(updated);
+        } catch (error) {
+            alert('Error deleting landmark');
+        }
+    };
 
     return (
         <View style={styles.container}>
@@ -15,6 +42,10 @@ const Facts = () => {
             {
                 currentIndex === 0 && (
                     <View style={{ width: '100%', alignItems: 'center' }}>
+
+                        <TouchableOpacity style={[styles.btn, {width: 53, height: 53, alignSelf: 'flex-start'}]} onPress={() => navigation.navigate('AddFactScreen')}>
+                            <Text style={{fontSize: 30, fontWeight: '700', color: '#fff'}}>+</Text>
+                        </TouchableOpacity>
                         
                         <View style={{height: 44}} />
 
@@ -55,6 +86,23 @@ const Facts = () => {
                                 </View>
                             ))
                         }
+                        {
+                            landmarks.map((fact, index) => (
+                                <View key={index} style={{width: '100%'}}>
+                                    <View style={{width: '100%', alignSelf: 'center', marginBottom: 20}}>
+                                        <Image source={{uri: fact.image}} style={{width: '100%', height: 160, resizeMode: 'cover', borderRadius: 7}} />                                    
+                                        <View style={styles.infoContainer}>
+                                            <Text style={[styles.infoText, {fontSize: 20}]}>{fact.name}</Text>
+                                            <Text style={[styles.infoText, {width: '70%'}]} numberOfLines={4} ellipsizeMode='tail'>{fact.description}</Text>
+                                        </View>
+                                        <TouchableOpacity style={[styles.btn, {position: 'absolute', bottom: 30, right: 10}]} onPress={() => navigation.navigate('FactLocationInfoScreen', { location: fact })}>
+                                            <Image source={require('../assets/icons/arrow.png')} style={{width: 34, height: 22, resizeMode: 'contain'}} />
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+                            ))
+                        }
+                        <View style={{height: 120}} />
                     </ScrollView>
                 )
             }

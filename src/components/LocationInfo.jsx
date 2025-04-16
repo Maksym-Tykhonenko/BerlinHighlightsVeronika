@@ -22,40 +22,49 @@ const LocationInfo = ({ item }) => {
                 <Text style={styles.title}>{item.name}</Text>
             </View>
 
-            <View style={{width: '100%', alignSelf: 'center', marginBottom: 20}}>
-                <Image source={item.image} style={{width: '100%', height: 160, resizeMode: 'cover', borderRadius: 7}} />                                    
-                <View style={styles.infoContainer}>
-                    <View style={{width: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20}}>
-                        <Text style={styles.infoText}>📍 {item.address}</Text>
-                        <TouchableOpacity onPress={() => copyAddress(item.address)}>
-                            <Image source={require('../assets/icons/copy.png')} style={{width: 18, height: 20}} />
-                        </TouchableOpacity>
-                    </View>
-                    <Text style={[styles.infoText, { marginBottom: 20 }]}>{item.description}</Text>
-                    <Text style={[styles.infoText, { marginBottom: 20 }]}>🕒 Opening hours: {item.opened}</Text>
-                    <Text style={[styles.infoText, {marginBottom: 20}]}>🚇 Nearest metro station: {item.metro}</Text>
-                </View>
-            </View>
-
             <ScrollView style={{width: '100%'}}>
-                <Text style={styles.subTitle}>🌿 Nature Nearby</Text>
 
-                <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%'}}>
-                    {
-                        item.nearby.map((place, index) => (
-                            <TouchableOpacity
-                                key={index}
-                                style={styles.placeCard}
-                                onPress={() => navigation.navigate('PlaceInfoScreen', { place: place })}
-                            >
-                                <Image source={place.image} style={styles.placeImage} />
-                                <View style={styles.placeTextContainer}>
-                                    <Text style={styles.placeText}>{place.name}</Text>
-                                </View>
+                <View style={{width: '100%', alignSelf: 'center', marginBottom: 20}}>
+                    <Image source={typeof item.image === 'string' ? { uri: item.image } : item.image} style={{width: '100%', height: 160, resizeMode: 'cover', borderRadius: 7}} />                                    
+                    <View style={styles.infoContainer}>
+                        <View style={{width: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20}}>
+                            <Text style={styles.infoText}>📍 {item.address}</Text>
+                            <TouchableOpacity onPress={() => copyAddress(item.address)}>
+                                <Image source={require('../assets/icons/copy.png')} style={{width: 18, height: 20}} />
                             </TouchableOpacity>
-                        ))
-                    }
+                        </View>
+                        <Text style={[styles.infoText, { marginBottom: 20 }]}>{item.description}</Text>
+                        {item.opened && (<Text style={[styles.infoText, { marginBottom: 20 }]}>🕒 Opening hours: {item.opened}</Text>)}
+                        {(item.openedFrom && item.openedTo) && (<Text style={[styles.infoText, { marginBottom: 20 }]}>🕒 Opening hours: {item.openedFrom} - {item.openedTo}</Text>)}
+                        {item.metro && (<Text style={[styles.infoText, { marginBottom: 20 }]}>🚇 Nearest metro station: {item.metro}</Text>)}
+                    </View>
                 </View>
+
+                {
+                    item.nearby && (
+                        <>
+                            <Text style={styles.subTitle}>🌿 Nature Nearby</Text>
+
+                            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%'}}>
+                                {
+                                    item.nearby.map((place, index) => (
+                                        <TouchableOpacity
+                                            key={index}
+                                            style={styles.placeCard}
+                                            onPress={() => navigation.navigate('PlaceInfoScreen', { place: place })}
+                                        >
+                                            <Image source={place.image} style={styles.placeImage} />
+                                            <View style={styles.placeTextContainer}>
+                                                <Text style={styles.placeText}>{place.name}</Text>
+                                            </View>
+                                        </TouchableOpacity>
+                                    ))
+                                }
+                            </View>
+                        </>
+                    )
+                }
+
             </ScrollView>
                     
         </View>
