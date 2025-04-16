@@ -95,9 +95,17 @@ const Facts = () => {
                                             <Text style={[styles.infoText, {fontSize: 20}]}>{fact.name}</Text>
                                             <Text style={[styles.infoText, {width: '70%'}]} numberOfLines={4} ellipsizeMode='tail'>{fact.description}</Text>
                                         </View>
-                                        <TouchableOpacity style={[styles.btn, {position: 'absolute', bottom: 30, right: 10}]} onPress={() => navigation.navigate('FactLocationInfoScreen', { location: fact })}>
+                                        <TouchableOpacity style={[styles.btn, {position: 'absolute', bottom: 130, right: 10}]} onPress={() => navigation.navigate('FactLocationInfoScreen', { location: fact })}>
                                             <Image source={require('../assets/icons/arrow.png')} style={{width: 34, height: 22, resizeMode: 'contain'}} />
                                         </TouchableOpacity>
+                                        <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 12}}>
+                                            <TouchableOpacity style={styles.toolBtn} onPress={() => navigation.navigate('AddFactScreen', {item})}>
+                                                <Text style={styles.toolBtnText}>Edit</Text>
+                                            </TouchableOpacity>
+                                            <TouchableOpacity style={[styles.toolBtn, {backgroundColor: '#828181'}]} onPress={() => deleteLandmark(item)}>
+                                                <Text style={styles.toolBtnText}>Delete</Text>
+                                            </TouchableOpacity>
+                                        </View>
                                     </View>
                                 </View>
                             ))
@@ -163,6 +171,21 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: '400',
         color: '#fff',
+    },
+
+        toolBtn: {
+        width: '45%',
+        padding: 12,
+        backgroundColor: '#ff515b',
+        borderRadius: 7,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+    toolBtnText: {
+        fontSize: 12,
+        fontWeight: '600',
+        color: '#fff'
     }
   
 });
