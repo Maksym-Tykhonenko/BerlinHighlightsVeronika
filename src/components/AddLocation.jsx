@@ -62,25 +62,32 @@ const AddLocation = ({ item }) => {
         }
     };
 
-        const handleAddLocation = async () => {
+    const handleAddLocation = async () => {
         try {
+            const storedLocation = await AsyncStorage.getItem('locations');
+            const locations = storedLocation ? JSON.parse(storedLocation) : [];
+
             const newLocation = {
-                id: Date.now(),
-                name: name,
-                image: image,
-                address: address,
-                description: description,
+                id: item?.id || Date.now(),
+                name,
+                image,
+                address,
+                description,
                 openedFrom: formatTime(openedFrom),
                 openedTo: formatTime(openedTo),
             };
 
-            const storedLocation = await AsyncStorage.getItem('locations');
-            const locations = storedLocation ? JSON.parse(storedLocation) : [];
+            let updatedLocations;
 
-            const updatedLocations = [...locations, newLocation];
+            if (item?.id) {
+                updatedLocations = locations.map((loc) =>
+                    loc.id === item.id ? newLocation : loc
+                );
+            } else {
+                updatedLocations = [...locations, newLocation];
+            }
 
             await AsyncStorage.setItem('locations', JSON.stringify(updatedLocations));
-
             navigation.navigate('LocationsScreen');
         } catch (error) {
             alert('Error saving your location');

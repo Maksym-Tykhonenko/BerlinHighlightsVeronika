@@ -94,18 +94,18 @@ const Facts = () => {
                                         <View style={styles.infoContainer}>
                                             <Text style={[styles.infoText, {fontSize: 20}]}>{fact.name}</Text>
                                             <Text style={[styles.infoText, {width: '70%'}]} numberOfLines={4} ellipsizeMode='tail'>{fact.description}</Text>
+                                            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 12}}>
+                                                <TouchableOpacity style={styles.toolBtn} onPress={() => navigation.navigate('AddFactScreen', {fact: fact})}>
+                                                    <Text style={styles.toolBtnText}>Edit</Text>
+                                                </TouchableOpacity>
+                                                <TouchableOpacity style={[styles.toolBtn, {backgroundColor: '#828181'}]} onPress={() => deleteLandmark(fact)}>
+                                                    <Text style={styles.toolBtnText}>Delete</Text>
+                                                </TouchableOpacity>
+                                            </View>
                                         </View>
-                                        <TouchableOpacity style={[styles.btn, {position: 'absolute', bottom: 130, right: 10}]} onPress={() => navigation.navigate('FactLocationInfoScreen', { location: fact })}>
+                                        <TouchableOpacity style={[styles.btn, {position: 'absolute', bottom: 110, right: 20}]} onPress={() => navigation.navigate('FactLocationInfoScreen', { location: fact })}>
                                             <Image source={require('../assets/icons/arrow.png')} style={{width: 34, height: 22, resizeMode: 'contain'}} />
                                         </TouchableOpacity>
-                                        <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 12}}>
-                                            <TouchableOpacity style={styles.toolBtn} onPress={() => navigation.navigate('AddFactScreen', {item})}>
-                                                <Text style={styles.toolBtnText}>Edit</Text>
-                                            </TouchableOpacity>
-                                            <TouchableOpacity style={[styles.toolBtn, {backgroundColor: '#828181'}]} onPress={() => deleteLandmark(item)}>
-                                                <Text style={styles.toolBtnText}>Delete</Text>
-                                            </TouchableOpacity>
-                                        </View>
                                     </View>
                                 </View>
                             ))

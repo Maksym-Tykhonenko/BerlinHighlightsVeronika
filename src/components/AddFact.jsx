@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, TextInput, ScrollView, StyleSheet, Dimensions } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { useNavigation } from "@react-navigation/native"
 
 const { height } = Dimensions.get('window');
 
-const AddFact = ({ item }) => {
+const AddFact = ({ fact }) => {
     const navigation = useNavigation();
-    const [image, setImage] = useState(item?.image || null);
-    const [name, setName] = useState(item?.name || null);
-    const [address, setAddress] = useState(item?.address || null);
-    const [description, setDescription] = useState(item?.description || null);
+    const [image, setImage] = useState(fact?.image || null);
+    const [name, setName] = useState(fact?.name || null);
+    const [address, setAddress] = useState(fact?.address || null);
+    const [description, setDescription] = useState(fact?.description || null);
     
     const uploadLocationImage = async () => {
         try {
@@ -25,23 +24,30 @@ const AddFact = ({ item }) => {
         }
     };
 
-        const handleAddLandmark = async () => {
+    const handleAddLandmark = async () => {
         try {
+            const storedLandmarks = await AsyncStorage.getItem('landmarks');
+            const facts = storedLandmarks ? JSON.parse(storedLandmarks) : [];
+
             const newLandmark = {
-                id: Date.now(),
+                id: fact?.id || Date.now(),
                 name: name,
                 image: image,
                 address: address,
                 description: description,
             };
 
-            const storedLandmarks = await AsyncStorage.getItem('landmarks');
-            const facts = storedLandmarks ? JSON.parse(storedLandmarks) : [];
+            let updatedLandmarks;
 
-            const updatedLandmarks = [...facts, newLandmark];
+            if (fact?.id) {
+                updatedLandmarks = facts.map((item) =>
+                    item.id === fact.id ? newLandmark : item
+                );
+            } else {
+                updatedLandmarks = [...facts, newLandmark];
+            }
 
             await AsyncStorage.setItem('landmarks', JSON.stringify(updatedLandmarks));
-
             navigation.navigate('FactsScreen');
         } catch (error) {
             alert('Error saving your landmark');
@@ -55,7 +61,7 @@ const AddFact = ({ item }) => {
                 <TouchableOpacity onPress={() => navigation.goBack()}>
                     <Image source={require('../assets/icons/back.png')} style={{width: 34, height: 22, resizeMode: 'contain'}} />
                 </TouchableOpacity>
-                <Text style={styles.title}>{item ? 'Edit landmark' : 'Add a landmark'}</Text>
+                <Text style={styles.title}>{fact ? 'Edit landmark' : 'Add a landmark'}</Text>
             </View>
             
             <Image source={require('../assets/decor/logo.png')} style={{ width: 135, height: height * 0.11, resizeMode: 'contain', marginBottom: height * 0.05, marginTop: 20 }} />
