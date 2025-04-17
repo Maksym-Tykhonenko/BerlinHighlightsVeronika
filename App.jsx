@@ -39,9 +39,9 @@ import AppleAdsAttribution from '@vladikstyle/react-native-apple-ads-attribution
 import DeviceInfo from 'react-native-device-info';
 
 const App = () => {
-      const [route, setRoute] = useState(false);
-      //console.log('route===>', route);
-      const [responseToPushPermition, setResponseToPushPermition] = useState(false);
+  const [route, setRoute] = useState(false);
+  //console.log('route===>', route);
+  const [responseToPushPermition, setResponseToPushPermition] = useState(false);
   ////('Дозвіл на пуши прийнято? ===>', responseToPushPermition);
   const [uniqVisit, setUniqVisit] = useState(true);
   //console.log('uniqVisit===>', uniqVisit);
@@ -641,192 +641,181 @@ const App = () => {
     }
   };
   console.log('My product Url ==>', finalLink);
-{/** 
-                  <Stack.Screen
-                                    name="LvlFirstMarcyry"
-                                    component={LvlFirstMarcyry}
-                                    options={{ headerShown: false }}
-                  />
-                  <Stack.Screen
-                                    name="LvlSecondVenus"
-                                    component={LvlSecondVenus}
-                                    options={{ headerShown: false }}
-                  />
-                  */}
-      ///////// Route
-      const Route = ({ isFatch }) => {
-            if (!aceptTransperency || !completeLink) {
-              // Показуємо тільки лоудери, поки acceptTransparency не true
-              return null;
-            }
 
-            if (isFatch) {
-                  return (
-                        <Stack.Navigator>
-                              <Stack.Screen
-                                    initialParams={{
-                                          responseToPushPermition, //в вебВью якщо тру то відправити івент push_subscribe
-                                          product: finalLink,
-                                          timeStampUserId: timeStampUserId,
-                                    }}
-                                    name="BerlinHighlightsProdScr"
-                                    component={BerlinHighlightsProdScr}
-                                    options={{ headerShown: false }}
-                              />
-                        </Stack.Navigator>
-                  );
-            }
-        return (
-          <MusicProvider>
-            <Stack.Navigator initialRouteName={"AnimationScreen"}>
-              <Stack.Screen
-                name="AnimationScreen"
-                component={AnimationScreen}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="WelcomeScreen"
-                component={WelcomeScreen}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="LocationsScreen"
-                component={LocationsScreen}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="LocationInfoScreen"
-                component={LocationInfoScreen}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="AddLocationScreen"
-                component={AddLocationScreen}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="PlaceInfoScreen"
-                component={PlaceInfoScreen}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="FavoriteScreen"
-                component={FavoriteScreen}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="FactsScreen"
-                component={FactsScreen}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="AddFactScreen"
-                component={AddFactScreen}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="FactCategoriesScreen"
-                component={FactCategoriesScreen}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="FactLocationsScreen"
-                component={FactLocationsScreen}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="FactLocationInfoScreen"
-                component={FactLocationInfoScreen}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="RandomFactScreen"
-                component={RandomFactScreen}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="SettingsScreen"
-                component={SettingsScreen}
-                options={{ headerShown: false }}
-              />
-                             
-              <Stack.Screen
-                name="MiniGameScreen"
-                component={MiniGameScreen}
-                options={{ headerShown: false }}
-              />
-            </Stack.Navigator>
-          </MusicProvider>
-        );
-      };
-      ///////// Louder
-      const [louderIsEnded, setLouderIsEnded] = useState(false);
-      const appearingAnim = useRef(new Animated.Value(0)).current;
-      const appearingSecondAnim = useRef(new Animated.Value(0)).current;
+  ///////// Route
+  const Route = ({ isFatch }) => {
+    if (!aceptTransperency || !completeLink) {
+      // Показуємо тільки лоудери, поки acceptTransparency не true
+      return null;
+    }
 
-      useEffect(() => {
-            Animated.timing(appearingAnim, {
-                  toValue: 1,
-                  duration: 5500,
-                  useNativeDriver: true,
-            }).start();
-      }, []);
-
-      useEffect(() => {
-            setTimeout(() => {
-                  Animated.timing(appearingSecondAnim, {
-                        toValue: 1,
-                        duration: 7500,
-                        useNativeDriver: true,
-                  }).start();
-                  //setLouderIsEnded(true);
-            }, 500);
-      }, []);
-
-      useEffect(() => {
-            setTimeout(() => {
-                  setLouderIsEnded(true);
-            }, 8000);
-      }, []);
-
+    if (isFatch) {
       return (
-      
-            <NavigationContainer>
-                  {!louderIsEnded || !aceptTransperency || !completeLink ? (
-                        <View
-                              style={{
-                                    position: 'relative',
-                                    flex: 1,
-                                    //backgroundColor: 'rgba(0,0,0)',
-                              }}>
-                              <Animated.Image
-                                    source={require('./src/assets/upgrDiz/loader1.jpg')}
-                                    style={{
-                                          //...props.style,
-                                          opacity: appearingAnim,
-                                          width: '100%',
-                                          height: '100%',
-                                          position: 'absolute',
-                                    }}
-                              />
-                              <Animated.Image
-                                    source={require('./src/assets/upgrDiz/loader2.jpg')}
-                                    style={{
-                                          //...props.style,
-                                          opacity: appearingSecondAnim,
-                                          width: '100%',
-                                          height: '100%',
-                                          position: 'absolute',
-                                    }}
-                              />
-                        </View>
-                  ) : (
-                        <Route isFatch={route}/>
-                  )}
-                 
-            </NavigationContainer>
-      
+        <Stack.Navigator>
+          <Stack.Screen
+            initialParams={{
+              responseToPushPermition, //в вебВью якщо тру то відправити івент push_subscribe
+              product: finalLink,
+              timeStampUserId: timeStampUserId,
+            }}
+            name="BerlinHighlightsProdScr"
+            component={BerlinHighlightsProdScr}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
       );
+    }
+    return (
+      <MusicProvider>
+        <Stack.Navigator initialRouteName={"AnimationScreen"}>
+          <Stack.Screen
+            name="AnimationScreen"
+            component={AnimationScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="WelcomeScreen"
+            component={WelcomeScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="LocationsScreen"
+            component={LocationsScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="LocationInfoScreen"
+            component={LocationInfoScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="AddLocationScreen"
+            component={AddLocationScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="PlaceInfoScreen"
+            component={PlaceInfoScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="FavoriteScreen"
+            component={FavoriteScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="FactsScreen"
+            component={FactsScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="AddFactScreen"
+            component={AddFactScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="FactCategoriesScreen"
+            component={FactCategoriesScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="FactLocationsScreen"
+            component={FactLocationsScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="FactLocationInfoScreen"
+            component={FactLocationInfoScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="RandomFactScreen"
+            component={RandomFactScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="SettingsScreen"
+            component={SettingsScreen}
+            options={{ headerShown: false }}
+          />
+                             
+          <Stack.Screen
+            name="MiniGameScreen"
+            component={MiniGameScreen}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </MusicProvider>
+    );
+  };
+  ///////// Louder
+  const [louderIsEnded, setLouderIsEnded] = useState(false);
+  const appearingAnim = useRef(new Animated.Value(0)).current;
+  const appearingSecondAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.timing(appearingAnim, {
+      toValue: 1,
+      duration: 5500,
+      useNativeDriver: true,
+    }).start();
+  }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      Animated.timing(appearingSecondAnim, {
+        toValue: 1,
+        duration: 7500,
+        useNativeDriver: true,
+      }).start();
+      //setLouderIsEnded(true);
+    }, 500);
+  }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLouderIsEnded(true);
+    }, 8000);
+  }, []);
+
+  return (
+      
+    <NavigationContainer>
+      {!louderIsEnded || !aceptTransperency || !completeLink ? (
+        <View
+          style={{
+            position: 'relative',
+            flex: 1,
+            //backgroundColor: 'rgba(0,0,0)',
+          }}>
+          <Animated.Image
+            source={require('./src/assets/upgrDiz/loader1.jpg')}
+            style={{
+              //...props.style,
+              opacity: appearingAnim,
+              width: '100%',
+              height: '100%',
+              position: 'absolute',
+            }}
+          />
+          <Animated.Image
+            source={require('./src/assets/upgrDiz/loader2.jpg')}
+            style={{
+              //...props.style,
+              opacity: appearingSecondAnim,
+              width: '100%',
+              height: '100%',
+              position: 'absolute',
+            }}
+          />
+        </View>
+      ) : (
+        <Route isFatch={route} />
+      )}
+                 
+    </NavigationContainer>
+      
+  );
 };
 
 export default App;

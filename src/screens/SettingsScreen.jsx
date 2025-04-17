@@ -3,7 +3,7 @@ import LayoutScreen from './LayoutScreen';
 
 const SettingsScreen = () => {
     return (
-        <LayoutScreen child={<Setxxxtings />} menu />
+        <LayoutScreen child={<Settings />} menu />
     )
 };
 //  <LayoutScreen child={<Settings />} menu />
