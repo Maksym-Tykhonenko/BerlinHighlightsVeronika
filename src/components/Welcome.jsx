@@ -22,12 +22,12 @@ const Welcome = () => {
               )
           }
 
-            <Image source={require('../assets/decor/logo.png')} style={{width: 187, height: height * 0.16, resizeMode: 'contain', marginBottom: height * 0.07, marginTop: height * 0.2}} />
+            <Image source={require('../assets/decor/logo.png')} style={{width: 187, height: height * 0.16, resizeMode: 'contain', marginBottom: height * 0.04, marginTop: height * 0.07}} />
       
             <Text style={styles.text}>BERLIN</Text>
             <Text style={styles.text}>HIGHLIGHTS</Text>
             
-            <View style={{width: '100%', height: 150, marginTop: height * 0.05}}>
+            <View style={{width: '100%', height: 150, marginTop: height * 0.03}}>
                 <Image source={text} style={{width: '100%', height: '100%', resizeMode: 'contain'}} />
                 <TouchableOpacity style={styles.btn} onPress={() => currentIndex === 2 ? navigation.navigate('FactsScreen') : setCurrentIndex((prev) => prev + 1)}>
                     <Image source={require('../assets/icons/arrow.png')} style={{width: 34, height: 22, resizeMode: 'contain'}} />
@@ -47,16 +47,16 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        fontSize: 24,
+        fontSize: 20,
         fontWeight: '600',
         color: '#000',
         position: 'absolute',
-        top: height * 0.12,
+        top: height * 0.05,
         alignSelf: 'center'
     },
     
     text: {
-        fontSize: 53,
+        fontSize: 43,
         fontWeight: '800',
         lineHeight: '120%',
         color: '#000',
